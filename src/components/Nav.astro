@@ -1,0 +1,100 @@
+---
+const launchMode = import.meta.env.LAUNCH_MODE ?? 'coming_soon';
+const isLive = launchMode === 'live';
+---
+
+<nav
+  class="sticky top-0 z-50 border-b border-gold/20 bg-navy/95 backdrop-blur-sm"
+>
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <!-- Logo + Wordmark -->
+    <a href="/" class="flex items-center gap-3">
+      <img
+        src="/images/logo-mark.png"
+        alt="Dynasty Desk logo"
+        width="32"
+        height="32"
+        class="h-8 w-8"
+      />
+      <span class="font-body text-sm font-semibold tracking-[0.2em] text-white">
+        DYNASTY DESK
+      </span>
+    </a>
+
+    <!-- Desktop Links -->
+    <div class="hidden items-center gap-8 md:flex">
+      <a
+        href="/support"
+        class="text-sm text-gray transition-colors hover:text-cream"
+      >
+        Support
+      </a>
+      <a
+        href="/privacy"
+        class="text-sm text-gray transition-colors hover:text-cream"
+      >
+        Privacy
+      </a>
+      {isLive && (
+        <a
+          href="#"
+          class="rounded-full border border-gold px-4 py-1.5 text-sm font-medium text-gold transition-colors hover:bg-gold hover:text-navy"
+        >
+          {/* <!-- TODO: Replace with actual App Store URL --> */}
+          Download
+        </a>
+      )}
+    </div>
+
+    <!-- Mobile Hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="flex flex-col gap-1.5 md:hidden"
+      aria-label="Toggle navigation menu"
+      aria-expanded="false"
+    >
+      <span class="block h-0.5 w-6 bg-cream transition-transform" id="hamburger-top"></span>
+      <span class="block h-0.5 w-6 bg-cream transition-opacity" id="hamburger-mid"></span>
+      <span class="block h-0.5 w-6 bg-cream transition-transform" id="hamburger-bot"></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div
+    id="mobile-menu"
+    class="hidden border-t border-gold/10 bg-navy px-6 pb-6 pt-4 md:hidden"
+  >
+    <div class="flex flex-col gap-4">
+      <a href="/support" class="text-sm text-gray hover:text-cream">Support</a>
+      <a href="/privacy" class="text-sm text-gray hover:text-cream">Privacy</a>
+      {isLive && (
+        <a
+          href="#"
+          class="mt-2 inline-block rounded-full border border-gold px-4 py-1.5 text-center text-sm font-medium text-gold hover:bg-gold hover:text-navy"
+        >
+          {/* <!-- TODO: Replace with actual App Store URL --> */}
+          Download
+        </a>
+      )}
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const top = document.getElementById('hamburger-top');
+  const mid = document.getElementById('hamburger-mid');
+  const bot = document.getElementById('hamburger-bot');
+
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+    top?.classList.toggle('translate-y-[4px]');
+    top?.classList.toggle('rotate-45');
+    mid?.classList.toggle('opacity-0');
+    bot?.classList.toggle('-translate-y-[4px]');
+    bot?.classList.toggle('-rotate-45');
+  });
+</script>

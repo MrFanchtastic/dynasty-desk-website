@@ -1,0 +1,93 @@
+---
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    q: 'How do I save my dynasty?',
+    a: 'Dynasty Desk saves automatically on your device. To sync across devices and back up to the cloud, create a free account under Settings → Account.',
+  },
+  {
+    q: 'What is Dynasty Pass?',
+    a: 'Dynasty Pass is an optional subscription that unlocks expanded customization features — including additional league settings, extended save capacity, and more re-sims per season. It never provides a competitive gameplay advantage.',
+  },
+  {
+    q: 'How do re-sims work?',
+    a: "You get 3 re-sims per season on the free tier. If you don't like a game result, you can re-simulate it for a different outcome. Re-sims reset at the start of each season.",
+  },
+  {
+    q: "The AI articles aren't generating. What do I do?",
+    a: "AI articles require an internet connection. If you're offline or the service is temporarily unavailable, Dynasty Desk will display a summary instead. Try again when connected.",
+  },
+  {
+    q: 'How do I report a bug?',
+    a: 'Email us at support@dynastydesk.app or post in #feedback on our Discord server. Include your device model and iOS/Android version if possible.',
+  },
+  {
+    q: 'How do I delete my account?',
+    a: "Email support@dynastydesk.app from the email address associated with your account and we'll delete it within 7 days.",
+  },
+];
+---
+
+<Base title="Support — Dynasty Desk">
+  <Nav />
+  <main class="bg-white py-16 text-navy md:py-24">
+    <div class="mx-auto max-w-3xl px-6">
+      <h1 class="font-display text-3xl font-bold text-navy md:text-4xl">Support</h1>
+
+      <!-- FAQ Section -->
+      <section class="mt-12">
+        <h2 class="mb-8 font-display text-2xl font-bold text-navy">Frequently Asked Questions</h2>
+        <div class="space-y-4">
+          {faqs.map((faq) => (
+            <details class="group rounded-lg border border-navy/10 bg-navy/[0.02]">
+              <summary class="flex cursor-pointer items-center justify-between gap-4 px-6 py-5 text-left font-medium text-navy">
+                <span>{faq.q}</span>
+                <svg
+                  class="h-5 w-5 flex-none text-gray transition-transform group-open:rotate-180"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m19 9-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-6 pb-5 text-navy/70">
+                <p>{faq.a}</p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <!-- Contact Section -->
+      <section class="mt-16 rounded-xl border border-navy/10 bg-navy/[0.02] p-8 text-center">
+        <h2 class="mb-2 font-display text-xl font-bold text-navy">
+          Still need help?
+        </h2>
+        <p class="mb-6 text-navy/60">
+          We're a small team and we read everything.
+        </p>
+        <div class="flex flex-col items-center gap-3 text-sm">
+          <a
+            href="mailto:support@dynastydesk.app"
+            class="font-medium text-gold-dark underline underline-offset-2 hover:text-gold"
+          >
+            support@dynastydesk.app
+          </a>
+          <!-- TODO: Replace with actual Discord invite URL -->
+          <a
+            href="#"
+            class="font-medium text-gold-dark underline underline-offset-2 hover:text-gold"
+          >
+            Join us on Discord
+          </a>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</Base>

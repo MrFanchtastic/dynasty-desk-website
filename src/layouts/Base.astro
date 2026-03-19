@@ -1,0 +1,51 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Dynasty Desk — Build Your Football Legacy',
+  description = 'The deepest football GM sim on mobile. Draft, trade, sign, and build a dynasty that lasts — with AI-powered sports journalism and statistically accurate simulation. Available on iOS and Android.',
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://dynastydesk.app');
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="/images/icon-512.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/images/icon-512.png" />
+
+    <link rel="canonical" href={canonicalURL.href} />
+    <link rel="icon" type="image/png" href="/images/logo-mark.png" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>{title}</title>
+  </head>
+  <body class="bg-navy font-body text-cream antialiased">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,23 @@
+---
+const launchMode = import.meta.env.LAUNCH_MODE ?? 'coming_soon';
+const isLive = launchMode === 'live';
+const label = isLive
+  ? 'Join the Dynasty Desk community.'
+  : 'Get notified when we launch on Draft Day, April 23.';
+---
+
+<div class="mx-auto max-w-md">
+  <p class="mb-4 text-sm text-cream/70">{label}</p>
+
+  <!--
+    EMAIL CAPTURE: Mailchimp Embed
+    Replace the contents of this div with your Mailchimp embedded form code.
+    Get your embed code from: Mailchimp → Audience → Signup forms → Embedded forms
+  -->
+  <div id="email-capture" class="rounded-lg border border-gold/20 bg-navy-light p-6">
+    <p class="text-xs text-gray">
+      Mailchimp email capture form will appear here. Paste your Mailchimp embed code
+      inside the <code class="text-gold/60">#email-capture</code> div.
+    </p>
+  </div>
+</div>

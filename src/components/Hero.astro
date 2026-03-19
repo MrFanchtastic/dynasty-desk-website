@@ -1,0 +1,126 @@
+---
+import AppStoreButtons from './AppStoreButtons.astro';
+import EmailCapture from './EmailCapture.astro';
+
+const launchMode = import.meta.env.LAUNCH_MODE ?? 'coming_soon';
+const isLive = launchMode === 'live';
+---
+
+<section class="relative overflow-hidden bg-navy">
+  <!-- Subtle grain/noise overlay -->
+  <div
+    class="pointer-events-none absolute inset-0 opacity-[0.03]"
+    style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 256 256%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noise%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.9%22 numOctaves=%224%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noise)%22/%3E%3C/svg%3E'); background-size: 256px 256px;"
+  >
+  </div>
+  <!-- Subtle diagonal gradient -->
+  <div
+    class="pointer-events-none absolute inset-0 bg-gradient-to-br from-navy-light/40 via-transparent to-gold/[0.02]"
+  >
+  </div>
+
+  <div class="relative mx-auto max-w-3xl px-6 py-24 text-center md:py-36">
+    <!-- Logo Mark -->
+    <img
+      src="/images/logo-mark.png"
+      alt="Dynasty Desk logo mark"
+      width="80"
+      height="80"
+      class="mx-auto mb-8 h-20 w-20"
+    />
+
+    <!-- Title -->
+    <h1
+      class="font-display text-4xl font-bold tracking-wider text-white md:text-6xl"
+    >
+      DYNASTY DESK
+    </h1>
+
+    <!-- Tagline -->
+    <p class="mt-4 font-display text-xl italic text-gold md:text-2xl">
+      Build Your Legacy.
+    </p>
+
+    <!-- Description -->
+    <p class="mx-auto mt-6 max-w-xl text-base leading-relaxed text-cream/80 md:text-lg">
+      The football GM sim that thinks like you do. Draft, trade, sign, and build
+      a dynasty that lasts — backed by real stats, real stories, and zero
+      pay-to-win.
+    </p>
+
+    <!-- App Store Buttons (live mode only) -->
+    {isLive && (
+      <div class="mt-10">
+        <AppStoreButtons />
+      </div>
+    )}
+
+    <!-- Email Capture -->
+    <div class="mt-10">
+      <EmailCapture />
+    </div>
+
+    <!-- Countdown (coming_soon mode only) -->
+    {!isLive && (
+      <div class="mt-12" id="countdown-container">
+        <p class="mb-4 text-sm text-gray">Launching Draft Day</p>
+        <div class="flex items-center justify-center gap-4 md:gap-6" id="countdown">
+          <div class="text-center">
+            <span class="block font-display text-3xl font-bold text-white md:text-5xl" id="cd-days">--</span>
+            <span class="mt-1 block text-xs uppercase tracking-wider text-gray">Days</span>
+          </div>
+          <span class="text-2xl text-gold/40">:</span>
+          <div class="text-center">
+            <span class="block font-display text-3xl font-bold text-white md:text-5xl" id="cd-hours">--</span>
+            <span class="mt-1 block text-xs uppercase tracking-wider text-gray">Hours</span>
+          </div>
+          <span class="text-2xl text-gold/40">:</span>
+          <div class="text-center">
+            <span class="block font-display text-3xl font-bold text-white md:text-5xl" id="cd-mins">--</span>
+            <span class="mt-1 block text-xs uppercase tracking-wider text-gray">Min</span>
+          </div>
+          <span class="text-2xl text-gold/40">:</span>
+          <div class="text-center">
+            <span class="block font-display text-3xl font-bold text-white md:text-5xl" id="cd-secs">--</span>
+            <span class="mt-1 block text-xs uppercase tracking-wider text-gray">Sec</span>
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
+{!isLive && (
+  <script>
+    const launchDate = new Date('2026-04-23T00:00:00-05:00').getTime();
+
+    function updateCountdown() {
+      const now = Date.now();
+      const diff = launchDate - now;
+
+      if (diff <= 0) {
+        const el = document.getElementById('countdown-container');
+        if (el) el.innerHTML = '<p class="text-gold font-display text-2xl italic">We\'re live!</p>';
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      const daysEl = document.getElementById('cd-days');
+      const hoursEl = document.getElementById('cd-hours');
+      const minsEl = document.getElementById('cd-mins');
+      const secsEl = document.getElementById('cd-secs');
+
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minsEl) minsEl.textContent = String(mins).padStart(2, '0');
+      if (secsEl) secsEl.textContent = String(secs).padStart(2, '0');
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+)}
