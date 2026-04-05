@@ -7,6 +7,17 @@ const isLive = launchMode === 'live';
 ---
 
 <section class="relative overflow-hidden bg-navy">
+  <!-- Hero background image -->
+  <div
+    class="pointer-events-none absolute inset-0 bg-cover bg-center"
+    style="background-image: url('/images/dynasty-desk-hero-image.png');"
+    aria-hidden="true"
+  >
+  </div>
+
+  <!-- Dark overlay for text contrast -->
+  <div class="pointer-events-none absolute inset-0 bg-black/55" aria-hidden="true"></div>
+
   <!-- Subtle grain/noise overlay -->
   <div
     class="pointer-events-none absolute inset-0 opacity-[0.03]"
