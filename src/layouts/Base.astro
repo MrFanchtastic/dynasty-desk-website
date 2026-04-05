@@ -1,4 +1,6 @@
 ---
+import { inject } from '@vercel/analytics';
+
 interface Props {
   title?: string;
   description?: string;
@@ -10,6 +12,8 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://dynastydesk.app');
+
+inject();
 ---
 
 <!doctype html>
